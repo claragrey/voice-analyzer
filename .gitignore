@@ -1,0 +1,23 @@
+.depenv
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+.env
+*.env
+
+# Virtual environments
+venv/
+env/
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Google credenials
+project-d7-65-50c13423c1af.json

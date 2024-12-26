@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <meta charset="utf-8">
+        </head>{% load static %}  <!-- Make sure this is present -->
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+        <title>Voice Analyzer</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="icon" href="{% static 'favicon.ico' %}" />
+    </head>
+    <body>
+        <header>
+            <h1>Voice Analyzer</h1>
+        </header>
+
+        <!-- File Upload Form -->
+        <form method="post" action="{% url 'transcribe' %}" enctype="multipart/form-data" id="fileUploadForm">
+            {% csrf_token %}
+            <input type="file" id="audioUpload" name="audio_file" accept="audio/*" onchange="document.getElementById('fileName').textContent = this.files[0]?.name || 'No file selected';">
+            <p id="fileName">No file selected</p>
+            <!-- <input type="hidden" id="timezoneOffset" name="timezone_offset"> -->
+            <button type="submit" id="analyzeButtonFile">Analyze File</button>
+        </form>    
+
+        <form id="audioRecordForm">
+            {% csrf_token %}
+            <button type="button" id="recordButton">Record</button>
+            <button type="button" id="stopButton" disabled>Stop</button>
+            <button type="button" id="analyzeButtonMic" style="display:none;">Analyze Recording</button>
+        </form>
+        
+        <div id="transcriptionResults">
+            <h3>Results:</h3>
+            <div id="transcript" aria-live="polite">Transcription will appear here...</div>
+            <div id="translatedText" aria-live="polite">Translation will appear here...</div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" style="display: none; color: blue;">Processing audio, please wait...</div>
+
+        <form action="{% url 'history' %}" method="get">
+            <button type="submit" id="historyButton">History</button>
+        </form>
+
+        <form action="{% url 'analysis_report' %}" method="get">
+            <button type="submit" id="analysisreportButton">Analysis Report</button>
+        </form>    
+        <script src="{% static 'script.js' %}"></script>
+    </body>
+</html>
