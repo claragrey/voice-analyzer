@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        </head>{% load static %}
+        <title>Login - Voice Analyzer</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="icon" href="{% static 'favicon.ico' %}" />
+    </head>
+    <body>
+        <h2>Login</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="loginButton">Login</button>
+        </form>
+        {% if form.errors %}
+            <p style="color: red;">Invalid username or password. Please try again.</p>
+        {% endif %}
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+    </body>
+</html>
+
+

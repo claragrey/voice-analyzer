@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        </head>{% load static %}
+        <title>Analysis Report</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="icon" href="{% static 'favicon.ico' %}" />
+    </head>
+    <body>
+        <h1>Analysis Report</h1>
+
+        <!-- Table A -->
+        <h2>Frequently Used Words</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Most Frequently Used Word</th>
+                    <th>Frequency Count</th>
+                    <th>Other User Username</th>
+                    <th>Other User ID</th>
+                    <th>Frequency Count for Other Users</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ current_user.username }}</td>
+                    <td>{{ current_user.user_id }}</td>
+                    <td>{{ current_user.most_frequent_word }}</td>
+                    <td>{{ current_user.frequency }}</td>
+                    {% for other_user in other_users_frequency %}
+                    <td>{{ other_user.username }}</td>
+                    <td>{{ other_user.user_id }}</td>
+                    <td>{{ other_user.frequency }}</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td> <!-- Empty for multiple other users -->
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Table B -->
+        <h2>Unique Phrases</h2>
+        <p> User Name: <strong>{{ current_user.username }}</strong> User ID: <strong>{{ current_user.user_id }}</strong></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Phrases</th>
+                    <th>Translation</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for phrase_data in unique_phrases_data %}
+                <tr>
+                    <td>{{ phrase_data.phrase }}</td>
+                    <td>{{ phrase_data.translation }}</td>
+                    <td>{{ phrase_data.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Most Similar Users</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in similar_users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
