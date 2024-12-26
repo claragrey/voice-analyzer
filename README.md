@@ -51,11 +51,12 @@ Voice Analyzer is a Django-based web application that transcribes speech input, 
    ```
 
 4. Secure your credetials in '.env' :
+  ```bash
     DATABASE_URL= <your cloud database url>
     GS_BUCKET_NAME= <your cloud bucket name>
     SECRET_KEY= <your django secret key> (in settings.py)
     USE_CLOUD_SQL_AUTH_PROXY=True
-
+  ```
 5. Apply migrations:
    ```bash
    python manage.py migrate
